@@ -1,0 +1,6 @@
+@import '~@angular/material/core/theming/all-theme';
+
+$primary: md-palette($md-indigo);
+$accent: md-palette($md-pink);
+
+$theme: md-light-theme($primary,$accent);

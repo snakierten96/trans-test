@@ -1,3 +1,10 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary" class="md-elevation-z4">
+  <button md-icon-button>
+    <md-icon>menu</md-icon>
+  </button>
+  {{ title }}
+</md-toolbar>
+
+<div id="container">
+  <router-outlet></router-outlet>
+</div>
