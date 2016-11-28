@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
+import { LoadingOverlayService } from './loading-overlay';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent implements OnInit {
   title = 'app works!';
 
-  constructor(private titleService: Title) { }
+  constructor(private titleService: Title, private _overlay: LoadingOverlayService) { }
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);

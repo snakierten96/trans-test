@@ -11,10 +11,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home';
 import { ItemsModule } from './items';
+import { LoadingStateService } from './loading-state.service';
+import { LoadingOverlayComponent, LoadingOverlayService } from './loading-overlay';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoadingOverlayComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,12 @@ import { ItemsModule } from './items';
     HomeModule,
     ItemsModule
   ],
-  providers: [Title],
+  entryComponents: [LoadingOverlayComponent],
+  providers: [
+    Title,
+    LoadingStateService,
+    LoadingOverlayService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
