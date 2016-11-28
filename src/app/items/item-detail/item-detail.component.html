@@ -1,23 +1,25 @@
-<md-card>
-  <md-card-title>Selected</md-card-title>
-  <md-card-content>
-    <md-list>
-      <md-list-item>
-        <span md-list-avatar>{{ item.id }}</span>
-        <p md-line>{{ item.name }}</p>
-      </md-list-item>
-    </md-list>
-  </md-card-content>
-</md-card>
-
-<md-card>
-  <md-card-title>Alternates</md-card-title>
-  <md-card-content>
-    <md-nav-list>
-      <a md-list-item *ngFor="let item of random" [routerLink]="['/item', item.id]">
-        <span md-list-avatar>{{ item.id }}</span>
-        <p md-line>{{ item.name }}</p>
-      </a>
-    </md-nav-list>
-  </md-card-content>
-</md-card>
+<div [@routeAnimation]="true">
+  <md-card>
+    <md-card-title>Selected</md-card-title>
+    <md-card-content>
+      <md-list>
+        <md-list-item>
+          <span md-list-avatar>{{ item.id }}</span>
+          <p md-line>{{ item.name }}</p>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+  </md-card>
+  
+  <md-card>
+    <md-card-title>Alternates</md-card-title>
+    <md-card-content>
+      <md-nav-list>
+        <a md-list-item *ngFor="let item of random" [routerLink]="['/item', item.id]">
+          <span md-list-avatar>{{ item.id }}</span>
+          <p md-line>{{ item.name }}</p>
+        </a>
+      </md-nav-list>
+    </md-card-content>
+  </md-card>
+</div>
