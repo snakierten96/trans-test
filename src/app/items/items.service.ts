@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-
 import * as _ from 'lodash';
 
 import { IItem } from './item';

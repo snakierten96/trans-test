@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { IItem } from '../item';
+import { IItem, IItemDetail } from '../item';
 
 @Component({
   selector: 'app-item-detail',
@@ -21,7 +21,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeData = this.route.data.subscribe(
-      (data: { data: { item: IItem, random: IItem[] }}) => {
+      (data: { data: IItemDetail }) => {
         this.item = data.data.item;
         this.random = data.data.random;
       },
