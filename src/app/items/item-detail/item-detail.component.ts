@@ -23,7 +23,8 @@ import { LoadingStateService } from '../../loading-state.service';
 })
 export class ItemDetailComponent implements OnInit, OnDestroy {
 
-  subscriptions: Subscription[] = [];
+  private _subscriptions: Subscription[] = [];
+
   item: IItem;
   random: IItem[];
   state: string = "inactive";
@@ -31,25 +32,22 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private loadingState: LoadingStateService) { }
 
   ngOnInit(): void {
-    let routeData = this.route.data.subscribe(
+    this._subscriptions.push(this.route.data.subscribe(
       (data: { data: IItemDetail }) => {
         this.item = data.data.item;
         this.random = data.data.random;
       },
       err => console.error(err)        
-    );
-    this.subscriptions.push(routeData);
-    let stateData = this.loadingState.getState().subscribe(
+    ));
+    this._subscriptions.push(this.loadingState.getState().subscribe(
       loading => this.state = (loading) ? 'inactive' : 'active',
       err => console.error(err)
-    );
-    this.subscriptions.push(stateData);
+    ));
   }
 
   ngOnDestroy(): void {
-    for ( let subscription of this.subscriptions ) {
-      subscription.unsubscribe();
-    }
+    this._subscriptions.forEach(subscription => subscription.unsubscribe());
+    this._subscriptions = [];
   }
 
 }

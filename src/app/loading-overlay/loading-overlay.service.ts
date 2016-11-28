@@ -3,11 +3,15 @@ import { Router, Event, NavigationStart,
          NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { Overlay, OverlayState, OverlayRef, Portal, ComponentPortal } from '@angular/material';
 
+import { Subscription } from 'rxjs/Rx';
+
 import { LoadingOverlayComponent } from './loading-overlay.component';
 import { LoadingStateService } from '../loading-state.service';
 
 @Injectable()
 export class LoadingOverlayService {
+
+  private _subscriptions: Subscription[] = [];
 
   constructor(router: Router, private loadingState: LoadingStateService,
     private _overlay: Overlay) {
@@ -15,15 +19,20 @@ export class LoadingOverlayService {
     let overlayRef = this._createOverlay();
     let portal = new ComponentPortal(LoadingOverlayComponent);
 
-    router.events.subscribe(event => this._navigationInterceptor(event));
-    this.loadingState.getState().subscribe(loading => {
+    this._subscriptions.push(router.events.subscribe(event => this._navigationInterceptor(event)));
+    this._subscriptions.push(this.loadingState.getState().subscribe(loading => {
       if (loading) {
         overlayRef.attach(portal);
       } else {
         overlayRef.detach();
       }
-    });
+    }));
 
+  }
+
+  releaseSubscriptions(): void {
+    this._subscriptions.forEach(subscription => subscription.unsubscribe());
+    this._subscriptions = [];
   }
 
   private _navigationInterceptor (event: Event): void {
