@@ -11,6 +11,7 @@
 # IDEs and editors
 /.idea
 /.vscode
+/.c9
 .project
 .classpath
 *.launch
