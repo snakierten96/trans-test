@@ -6,7 +6,7 @@ import { Overlay, OverlayState, OverlayRef, Portal, ComponentPortal } from '@ang
 import { Subscription } from 'rxjs/Rx';
 
 import { LoadingOverlayComponent } from './loading-overlay.component';
-import { LoadingStateService } from '../loading-state.service';
+import { LoadingStateService } from '../shared';
 
 @Injectable()
 export class LoadingOverlayService {

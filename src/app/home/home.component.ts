@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy,
 
 import { Subscription } from 'rxjs/Rx';
 
-import { LoadingStateService } from '../loading-state.service';
+import { LoadingStateService } from '../shared';
 
 @Component({
   selector: 'app-home',

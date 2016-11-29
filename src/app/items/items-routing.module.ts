@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ItemsListComponent } from './items-list';
-import { ItemDetailComponent } from './item-detail';
-
-import { ItemsResolveService } from './items-resolve.service';
-import { ItemDetailResolveService } from './item-detail-resolve.service';
+import { ItemsListComponent, ItemsResolveService } from './items-list';
+import { ItemDetailComponent, ItemDetailResolveService } from './item-detail';
 
 const routes: Routes = [
   { 

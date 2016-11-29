@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { IItem } from '../item';
-import { LoadingStateService } from '../../loading-state.service';
+import { LoadingStateService } from '../../shared';
 
 @Component({
   selector: 'app-items',
