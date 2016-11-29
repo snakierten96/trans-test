@@ -1,5 +1,10 @@
-div.md-list-item span {
-  background: rgba(0,0,0,.3);
-  text-align: center;
-  line-height: 40px;
+@import '../common';
+
+md-nav-list.floated {
+
+  div.md-list-item {
+    float: left;
+    width: 33%;
+  }
+
 }
