@@ -9,6 +9,7 @@ export class LoadingStateService {
 
   getState(): Observable<boolean> {
     return this.state.distinctUntilChanged()
+      .concatMap(value => Observable.of(value).delay(500))
   }
 
   setState(state: boolean): void {

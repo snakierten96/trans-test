@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation,
   trigger, state, style, transition, animate } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Rx';
 
 import { IItem } from '../item';
+import { LoadingStateService } from '../../loading-state.service';
 
 @Component({
   selector: 'app-items',
@@ -13,40 +14,37 @@ import { IItem } from '../item';
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('routeAnimation', [
-      state('*',style({ opacity: 1, transform: 'scale(1)' })),
-      transition(':enter', [ 
-        style({ 
-          opacity: 0, 
-          transform: 'scale(.95)'
-        }), 
-        animate('1s ease-in')
-      ]),
-      transition(':leave', [
-        animate('1s ease-out', style({
-          opacity: 0,
-          transform: 'scale(.95)'
-        }))
-      ])
+      state('active',style({ opacity: 1, transform: 'scale(1)' })),
+      state('inactive',style({ opacity: 0, transform: 'scale(.95)' })),
+      transition('inactive => active',animate('1s ease-in')),
+      transition('active => inactive',animate('1s 500ms ease-out'))
     ])
   ],
 })
 export class ItemsListComponent implements OnInit, OnDestroy {
 
-  routeData: Subscription;
+  private _subscriptions: Subscription[] = [];
+
   items: IItem[];
   selectedItem: IItem;
+  state: string = 'inactive';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private loadingState: LoadingStateService) { }
 
   ngOnInit(): void {
-    this.routeData = this.route.data.subscribe(
+    this._subscriptions.push(this.route.data.subscribe(
       ( data: { items: IItem[] }) => this.items = data.items,
       err => console.error(err)
-    );
+    ));
+    this._subscriptions.push(this.loadingState.getState().subscribe(
+      loading => this.state = (loading) ? 'inactive' : 'active',
+      err => console.error(err) 
+    ));
   }
 
   ngOnDestroy(): void {
-    this.routeData.unsubscribe();
+    this._subscriptions.forEach(subscription => subscription.unsubscribe());
+    this._subscriptions = [];
   }
 
 }

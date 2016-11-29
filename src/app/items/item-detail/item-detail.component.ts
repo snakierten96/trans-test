@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation,
   trigger, state, style, transition, animate } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Rx';
 
 import { IItem, IItemDetail } from '../item';
 import { LoadingStateService } from '../../loading-state.service';
@@ -15,7 +15,7 @@ import { LoadingStateService } from '../../loading-state.service';
   animations: [
     trigger('detailState', [
       state('active',style({ opacity: 1, transform: 'scale(1)' })),
-      state('inactive',style({ opacity: 0, transform: 'scale(.95)'})),
+      state('inactive',style({ opacity: 0, transform: 'scale(.95)' })),
       transition('inactive => active',animate('1s ease-in')),
       transition('active => inactive',animate('1s 500ms ease-out'))
     ])
