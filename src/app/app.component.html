@@ -1,18 +1,35 @@
-<md-toolbar color="primary" class="md-elevation-z4">
-  <button md-icon-button>
-    <md-icon>menu</md-icon>
-  </button>
-  {{ title }}
-</md-toolbar>
+<md-sidenav-layout fullscreen>
 
-<div id="container">
-  <ul>
-    <li>
-      <a [routerLink]="['/']">Home</a>
-    </li>
-    <li>
-      <a [routerLink]="['/browse']">Browse</a>
-    </li>
-  </ul>
-  <router-outlet></router-outlet>
-</div>
+  <md-sidenav #sidenav>
+    <md-nav-list>
+      <a *ngFor="let item of navigation"
+        [routerLink]="item.link" (click)="sidenav.toggle()"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }" md-list-item>
+        <md-icon md-list-icon>{{ item.icon }}</md-icon>
+        <span md-line>{{ item.name }}</span>
+      </a>
+    </md-nav-list>
+  </md-sidenav>
+
+  <md-toolbar color="primary" class="md-elevation-z4">
+    <button md-icon-button (click)="sidenav.toggle()">
+      <md-icon>menu</md-icon>
+    </button>
+    {{ title }}
+  </md-toolbar>
+
+  <div id="container">
+    <ul class="bodynav">
+      <li *ngFor="let item of navigation">
+        <a [routerLink]="item.link"
+          routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <md-icon>{{ item.icon }}</md-icon>
+          {{ item.name }}
+        </a>
+      </li>
+    </ul>
+    <router-outlet></router-outlet>
+  </div>
+
+</md-sidenav-layout>

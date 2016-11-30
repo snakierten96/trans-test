@@ -1,20 +1,46 @@
-li {
-  display: inline-block;
-  margin-right: 4px;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
+@import '../variables';
+$backcolor: rgba(map-get($accent, default),.4);
+$contrast: map-get($accent, "default-contrast");
+$foreground: map-get($theme, foreground);
 
-  a, a:active, a:visited {
-    color: #000;
-    text-decoration: none;
-    padding: 4px;
-    border-radius: 2px;
+md-sidenav {
+  md-nav-list {
+    a.active > div.md-list-item {
+      background: $backcolor;
+      color: $contrast;
+    }
   }
+}
 
-  a:hover {
-    color: #fff;
-    background: rgba(0,0,0,.2);
-    transition: all 200ms ease-in-out;
+ul.bodynav {
+
+  li {
+    display: inline-block;
+    margin-right: 4px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+
+    a, a:active, a:visited {
+      color: md-color($foreground, base);
+      text-decoration: none;
+      padding: 4px;
+      border-radius: 2px;
+
+      &.active {
+        color: map-get($accent, default);
+      }
+
+      &:hover {
+        color: map-get($accent, 'default-contrast');
+        background: $backcolor;
+        transition: all 200ms ease-in-out;
+      }
+
+      md-icon {
+        vertical-align: sub;
+      }
+    }
+
   }
 
 }

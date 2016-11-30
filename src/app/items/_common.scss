@@ -2,7 +2,7 @@ md-nav-list, md-list {
 
   div.md-list-item {
 
-    span {
+    span[md-list-avatar] {
       background: rgba(0,0,0,.3);
       text-align: center;
       line-height: 40px;
